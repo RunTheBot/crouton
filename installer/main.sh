@@ -140,8 +140,6 @@ shift "$((OPTIND-1))"
 # Check against the minimum version of Chromium OS
 if [ -n "$DOWNLOADONLY" ]; then
     :
-elif ! grep -q '_RELEASE_BUILD_NUMBER=' /etc/lsb-release 2>/dev/null; then
-    error 2 "$APPLICATION can only be installed in the Chromium OS dev mode shell."
 elif ! awk -F= '/_RELEASE_BUILD_NUMBER=/ { exit int($2) < '"${CROS_MIN_VERS:-0}"' }' \
         '/etc/lsb-release' 2>/dev/null; then
     error 2 "Your version of Chromium OS is extraordinarily old.
